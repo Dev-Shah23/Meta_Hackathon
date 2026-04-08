@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "name": "email-triage-dataset",
+    "version": "1.0.0",
+    "description": "Curated email dataset for the Email Triage & Response Environment. Contains real emails from the Enron corpus (SetFit/enron_spam on HuggingFace) with manually assigned priority labels and triage metadata.",
+    "source_dataset": "SetFit/enron_spam",
+    "source_url": "https://huggingface.co/datasets/SetFit/enron_spam",
+    "license": "Public domain (Enron corpus)",
+    "total_emails": 16,
+    "curation_seed": 42
+  },
+  "task1": {
+    "description": "Label 5 emails as urgent/normal/low priority",
+    "difficulty": "easy",
+    "emails": [
+      {
+        "id": "t1_001",
+        "from": "sally.beck@enron.com",
+        "subject": "year end 2000 performance feedback note : you will receive t...",
+        "body": "year end 2000 performance feedback note : you will receive this message each time you are selected as a reviewer . you have been selected to participate in the year end 2000 performance management process by providing meaningful feedback on specific employee ( s ) . your feedback plays an important role in the process , and your participation is critical to the success of enron ' s performance management goals . to complete requests for feedback , access pep at http : / / pep . corp . enron . com and select perform review under performance review services . you may begin providing feedback immediately and are requested to have all feedback forms completed by friday , november 17 , 2000 . if you have any questions regarding pep or your responsibility in the process , please contact the pep ",
+        "ground_truth_priority": "urgent",
+        "source": "SetFit/enron_spam",
+        "source_index": 78
+      },
+      {
+        "id": "t1_002",
+        "from": "vince.kaminski@enron.com",
+        "subject": "perspective on ferc regulatory action client conf call today...",
+        "body": "perspective on ferc regulatory action client conf call today , jun e 19 th , 2 : 00 pm edt perspective on ferc regulatory action client conference call today , tuesday , june 19 th 2 : 00 pm edt host : ray niles , power / natural gas analyst speaker : steve bergstrom , president & coo of dynegy steve bergstrom , president and chief operating officer of dynegy , will join us at 2 : 00 p . m . today for a conference call discussion of the recent ferc action imposing price controls in the west . the discussion will be followed by q & a . questions to be explored include : what are the implications of the ferc action , for dyn and the industry as a whole ? what is the earnings impact ? what are the risks of further re - regulation ? and whatever else is on your minds we attach two recent notes",
+        "ground_truth_priority": "urgent",
+        "source": "SetFit/enron_spam",
+        "source_index": 1
+      },
+      {
+        "id": "t1_003",
+        "from": "donna.fulton@regulatory.com",
+        "subject": "nominations for eastrans reciept for 3 / 15 and following . ...",
+        "body": "nominations for eastrans reciept for 3 / 15 and following . correction : 3 , 000 into the carrtwheel agreement . - - - - - - - - - - - - - - - - - - - - - - forwarded by bruce mcmills / ftworth / pefs / pec on 03 / 15 / 2000 03 : 50 pm - - - - - - - - - - - - - - - - - - - - - - - - - - - bruce mcmills 03 / 15 / 2000 03 : 49 pm to : dfarmer @ enron . com , stacey . neuweiler @ enron . com , briley @ enron . com cc : jim i . fields / gcs / cec / pec @ pec , chad w . cass / gcs / cec / pec @ pec , william e . speckels / gcs / cec / pec @ pec , michael r . cherry / easttexas / pefs / pec @ pec , darrel f . bane / easttexas / pefs / pec @ pec subject : nominations for eastrans reciept for 3 / 15 and following . also , 23 , 000 mmbtu into enron ' s cartwheel agreementat the hub . - - - - - - - ",
+        "ground_truth_priority": "normal",
+        "source": "SetFit/enron_spam",
+        "source_index": 28
+      },
+      {
+        "id": "t1_004",
+        "from": "john.arnold@trading-desk.com",
+        "subject": "congratulations ! congratulations on your latest achievement...",
+        "body": "congratulations ! congratulations on your latest achievement ! it ' s great that you are recognized for all your hard work and dedication . sincerely rl",
+        "ground_truth_priority": "low",
+        "source": "SetFit/enron_spam",
+        "source_index": 56
+      },
+      {
+        "id": "t1_005",
+        "from": "kate.symes@trading.com",
+        "subject": "lindy ' s b - day hi guys ! lindy ' s b - day lunch came to ...",
+        "body": "lindy ' s b - day hi guys ! lindy ' s b - day lunch came to $ 40 . 30 each . thanks , kim .",
+        "ground_truth_priority": "low",
+        "source": "SetFit/enron_spam",
+        "source_index": 98
+      }
+    ],
+    "ground_truth": {
+      "t1_001": "urgent",
+      "t1_002": "urgent",
+      "t1_003": "normal",
+      "t1_004": "low",
+      "t1_005": "low"
+    }
+  },
+  "task2": {
+    "description": "Draft a professional reply to a complaint email",
+    "difficulty": "medium",
+    "emails": [
+      {
+        "id": "t2_001",
+        "from": "frustrated.trader@westcoast-power.com",
+        "subject": "UNACCEPTABLE: Trade confirmation errors - 3rd time this month",
+        "body": "To whom it may concern,\n\nI am writing to formally complain about the persistent errors in trade confirmations coming from your desk. This is the THIRD time this month that we have received confirmations with incorrect volumes and pricing. Our last trade (ref: WCP-2024-8847) showed 500 MW at $42.50 when the agreed terms were 750 MW at $38.75.\n\nWhen we called to rectify, your operations team said they would 'look into it' -- that was five business days ago with no follow-up.\n\nWe need:\n1. Immediate correction of trade ref WCP-2024-8847\n2. A reconciliation of ALL trades executed between our desks this quarter\n3. A written explanation of what process failure is causing these errors\n4. Assurance that this will not happen again\n\nIf this is not resolved by end of week, we will be escalating to our legal team and reconsidering our trading relationship.\n\nRegards,\nMichael Torres\nHead of Trading Operations\nWestCoast Power LLC",
+        "ground_truth_priority": "urgent",
+        "source": "manually_crafted_enron_context"
+      }
+    ]
+  },
+  "task3": {
+    "description": "Full triage pipeline: label, reply, archive, flag",
+    "difficulty": "hard",
+    "emails": [
+      {
+        "id": "t3_001",
+        "from": "kate.symes@trading.com",
+        "subject": "year end 2000 performance feedback note : you will receive t...",
+        "body": "year end 2000 performance feedback note : you will receive this message each time you are selected as a reviewer . you have been selected to participate in the year end 2000 performance management process by providing meaningful feedback on specific employee ( s ) . your feedback plays an important role in the process , and your participation is critical to the success of enron ' s performance management goals . to complete requests for feedback , access pep at http : / / pep . corp . enron . com and select perform review under performance review services . you may begin providing feedback immediately and are requested to have all feedback forms completed by friday , november 17 , 2000 . if you have any questions regarding pep or your responsibility in the process , please contact the pep ",
+        "ground_truth_priority": "urgent",
+        "source": "SetFit/enron_spam",
+        "source_index": 1055
+      },
+      {
+        "id": "t3_002",
+        "from": "richard.shapiro@enron.com",
+        "subject": "bcp seat assignments all : attached you will find a list tha...",
+        "body": "bcp seat assignments all : attached you will find a list that reflects your seat assignments for business continuity planning ( bcp ) . these seats are located on the 30 th and 31 st floors of enron center north ( ecn ) . as previously communicated , you will report to these designated seats in the event of an outage in ecs . the exception to this is as follows : if your seat assignment is located on the 31 st floor , you will report to your original location that you occupied prior to your move into ecs . this will hold true until the monday after thanksgiving , as we will have the 31 st floor seats set up at that time . testing : once you have moved to ecs , if you would like to test your bcp location , you will be able to test your seat for functionality every thursday from 3 - 6 pm . t",
+        "ground_truth_priority": "urgent",
+        "source": "SetFit/enron_spam",
+        "source_index": 1074
+      },
+      {
+        "id": "t3_003",
+        "from": "digest@energy-news.io",
+        "subject": "Weekly Energy Market Report - Natural Gas Futures Update",
+        "body": "This week's energy market highlights:\n- Natural gas futures rose 3.2% on cold weather forecasts\n- FERC announced new transmission capacity rules\n- California ISO reported record renewable generation\n\nFull analysis at energy-news.io/weekly\nUnsubscribe: reply STOP",
+        "ground_truth_priority": "low",
+        "source": "manually_crafted",
+        "source_index": -2
+      },
+      {
+        "id": "t3_004",
+        "from": "winner@prize-center.info",
+        "subject": "aggressive stock traders aiert the stock watch alert newslet...",
+        "body": "aggressive stock traders aiert the stock watch alert newsletter attn : subscribers , analysts , stockbrokers quest oil ' s mission is to deliver a competitive and sustainable rate of return for our shareholders by acquiring , exploring and developing oil and gas properties around the world . now that oil and gas has entered a | ong - term bul | market , our speciaity in pinpointing the hottest companies of the few remaining undervalued energy piays has produced soaring returns . quest oil corporation ( qoil ) hastargeted oi | and gas exploration in both north america and internationaliy . the company is focused on acquiring quality oi | and gas properties in regions that provide economicaliy and poiitica | | y stable environments . quest is currently involved in projects both on the intern",
+        "ground_truth_priority": "low",
+        "source": "SetFit/enron_spam",
+        "source_index": 450
+      },
+      {
+        "id": "t3_005",
+        "from": "greg.whalley@enron.com",
+        "subject": "re : invitation to speak at infocast ' s upcoming \" market p...",
+        "body": "re : invitation to speak at infocast ' s upcoming \" market price volatility \" program ron , we are really swamped and i would like to keep our involvement in conferences to a reasonable minimum . i can promise that we shall help you with a future conference if it happens to be in houston . vince \" ron henderson \" on 01 / 11 / 2000 03 : 13 : 56 pm please respond to ronh @ . com to : vince j kaminski / hou / ect @ ect cc : subject : re : invitation to speak at infocast ' s upcoming \" market price volatility \" program vince , i am sorry you can ' t join us . is there someone on your staff who might be able to do the presentation \" a real options approach to asset valuation , \" scheduled for thursday , may 11 th , from 10 : 30 am to 12 : 00 pm . ? ron - - - - - original message - - - - - from ",
+        "ground_truth_priority": "normal",
+        "source": "SetFit/enron_spam",
+        "source_index": 1036
+      },
+      {
+        "id": "t3_006",
+        "from": "noreply@free-offers.biz",
+        "subject": "penelope cruz pamela andersons ' s most widely recognized ca...",
+        "body": "penelope cruz pamela andersons ' s most widely recognized camera appearance in sexual acts don ' t want anymore kevin , although somewhat soothed by out and day ? . most laptops . believe that grenade take a peek at white .",
+        "ground_truth_priority": "low",
+        "source": "SetFit/enron_spam",
+        "source_index": 444
+      },
+      {
+        "id": "t3_007",
+        "from": "richard.shapiro@enron.com",
+        "subject": "natural gas origination our natural gas business continues t...",
+        "body": "natural gas origination our natural gas business continues to benefit from effective account management and resource allocation focused on identifying and responding to the needs of our varied customers . in order to keep our organization optimally structured and to facilitate additional growth , we are making the following changes : producer / wellhead group the current mid - market , origination and wellhead pricing activity currently within the central and eastern gas regions will be consolidated with the derivatives group under fred lagrasta . this will create a single business unit focused upon the needs of the producing industry within the eastern u . s . the producer focus in the western u . s . and texas will remain unchanged reporting to mark whitt and brian redmond respectively .",
+        "ground_truth_priority": "normal",
+        "source": "SetFit/enron_spam",
+        "source_index": 1038
+      },
+      {
+        "id": "t3_008",
+        "from": "sally.beck@enron.com",
+        "subject": "out of the office i will be out of the office beginning thur...",
+        "body": "out of the office i will be out of the office beginning thursday , 12 / 24 , returning on tuesday , 1 / 4 . in my absence , i have asked steve venturatos to be the point person for texas operations . i realize that many of you will be working over the new year ' s week - end to ensure a smooth transaction into the new year . in advance , i truly appreciate all of the efforts . additionally , i would like to be kept informed on any critical issues , mainly so that i have no surprises when i return . therefore , i have provided numbers below where i can be reached . i will leave it to your discretion as to whether you call me or leave me a voice mail in the office . as you all know , i would rather be informed than surprised ! pager 877 - 497 - 3757 cellular 713 - 417 - 2995 home 970 - 920 -",
+        "ground_truth_priority": "urgent",
+        "source": "SetFit/enron_spam",
+        "source_index": 1090
+      },
+      {
+        "id": "t3_009",
+        "from": "unknown.sender@company.com",
+        "subject": "Re: that discussion last week",
+        "body": "Following up on our conversation. I think we should move forward but wanted to get your read on the situation first. There are some concerns internally that I'd rather discuss offline. Can you call me when you get a chance?",
+        "ground_truth_priority": "normal",
+        "source": "manually_crafted",
+        "source_index": -1
+      },
+      {
+        "id": "t3_010",
+        "from": "jeff.dasovich@regulatoryaffairs.com",
+        "subject": "re : mariner doorstep report dear kate , we are now ranking ...",
+        "body": "re : mariner doorstep report dear kate , we are now ranking the findings - red or yellow . since these need to be done immediately , i suggest that they are red findings . regards kate agnew 08 / 15 / 2000 01 : 59 pm to : shona wilson / na / enron @ enron , donna lowry / hou / ect @ ect , richard lauer / hou / ect @ ect , sally beck / hou / ect @ ect , wes colwell / hou / ect @ ect , ted murphy / hou / ect @ ect cc : john sorrells / aa / corp / enron @ enron subject : mariner doorstep report attached is the mariner doorstep report . jim brown indicated that the action dates for the three findings should be immediately , we decided that october 1 was a realistic deadline for implementation . please let us know any comments or questions . thank you kate",
+        "ground_truth_priority": "urgent",
+        "source": "SetFit/enron_spam",
+        "source_index": 1308
+      }
+    ],
+    "ground_truth": {
+      "t3_001": "urgent",
+      "t3_002": "urgent",
+      "t3_003": "low",
+      "t3_004": "low",
+      "t3_005": "normal",
+      "t3_006": "low",
+      "t3_007": "normal",
+      "t3_008": "urgent",
+      "t3_009": "normal",
+      "t3_010": "urgent"
+    },
+    "urgent_ids": [
+      "t3_001",
+      "t3_002",
+      "t3_008",
+      "t3_010"
+    ],
+    "archive_ids": [
+      "t3_004",
+      "t3_006"
+    ],
+    "flag_ids": [
+      "t3_009"
+    ]
+  }
+}

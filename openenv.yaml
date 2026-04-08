@@ -1,0 +1,66 @@
+name: email-triage-env
+version: "1.0.0"
+description: >
+  An email triage and response environment where an agent reads inbox emails,
+  assigns priority labels (urgent/normal/low), drafts professional replies,
+  archives junk, and flags ambiguous messages for human review.
+
+tasks:
+  - id: task1
+    name: Inbox Prioritisation
+    difficulty: easy
+    description: >
+      Read 5 emails and label each as urgent, normal, or low priority.
+    max_steps: 20
+    reward:
+      type: incremental
+      max: 1.0
+      per_correct_label: 0.2
+
+  - id: task2
+    name: Draft a Reply
+    difficulty: medium
+    description: >
+      Given a customer complaint email, draft a professional reply that
+      addresses all stated issues without fabricating facts.
+    max_steps: 10
+    reward:
+      type: checklist
+      max: 1.0
+      criteria:
+        - addresses_all_issues: 0.3
+        - professional_tone: 0.3
+        - correct_recipient_subject: 0.2
+        - no_fabricated_facts: 0.2
+
+  - id: task3
+    name: Full Triage Pipeline
+    difficulty: hard
+    description: >
+      10-email inbox: prioritise all, draft replies for urgent emails,
+      archive junk, flag ambiguous emails for human review.
+    max_steps: 60
+    reward:
+      type: holistic
+      max: 1.0
+      penalties:
+        destructive_action: -0.1
+        loop_action: -0.05
+
+environment:
+  language: python
+  entry_point: server.py
+  port: 8000
+  health_check: /health
+  state_endpoint: /state
+  reset_endpoint: /reset
+  step_endpoint: /step
+
+inference:
+  entry_point: inference.py
+  model: llama-3.3-70b-versatile
+
+resources:
+  cpu: 2
+  memory_gb: 4
+  gpu: false
