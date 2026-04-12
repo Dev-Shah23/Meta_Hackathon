@@ -14,8 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy source
 COPY . .
 
-# Expose env server port
-EXPOSE 8000
+# Expose env server port (HF Spaces requires 7860)
+EXPOSE 7860
 
 # Default: run the environment server
 CMD ["python", "server.py"]

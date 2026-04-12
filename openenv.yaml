@@ -50,7 +50,7 @@ tasks:
 environment:
   language: python
   entry_point: server.py
-  port: 8000
+  port: 7860
   health_check: /health
   state_endpoint: /state
   reset_endpoint: /reset
