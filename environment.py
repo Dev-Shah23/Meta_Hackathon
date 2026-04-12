@@ -190,11 +190,11 @@ class EmailTriageEnv:
         self._done = False
 
         if self.task == 1:
-            emails = [Email(**{**e}) for e in TASK1_EMAILS]
+            emails = [Email.model_validate(e) for e in TASK1_EMAILS]
         elif self.task == 2:
-            emails = [Email(**{**TASK2_EMAIL})]
+            emails = [Email.model_validate(TASK2_EMAIL)]
         else:
-            emails = [Email(**{**e}) for e in TASK3_EMAILS]
+            emails = [Email.model_validate(e) for e in TASK3_EMAILS]
 
         self._state = InboxState(inbox=emails)
 
