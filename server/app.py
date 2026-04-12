@@ -8,6 +8,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import uvicorn
+import os
+import sys
+
+# Ensure the root directory is in sys.path so environment.py can be imported
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from environment import EmailTriageEnv, Action
 

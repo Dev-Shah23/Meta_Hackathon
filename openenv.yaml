@@ -49,7 +49,7 @@ tasks:
 
 environment:
   language: python
-  entry_point: server.py
+  entry_point: server/app.py
   port: 7860
   health_check: /health
   state_endpoint: /state

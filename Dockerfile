@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 7860
 
 # Default: run the environment server
-CMD ["python", "server.py"]
+CMD ["python", "-m", "server.app"]
