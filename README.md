@@ -1,3 +1,12 @@
+---
+title: Email Triage Environment
+emoji: 📧
+colorFrom: red
+colorTo: purple
+sdk: docker
+app_port: 7860
+---
+
 # Email Triage & Response Environment
 
 An OpenEnv-compatible RL environment where an AI agent manages a realistic email inbox: reading messages, prioritising them, drafting replies, archiving junk, and flagging ambiguous items for human review.
