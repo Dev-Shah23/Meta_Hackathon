@@ -103,7 +103,7 @@ def run_task(task: int, max_steps: int = 40, verbose: bool = True) -> float:
     obs = env.reset()
 
     # --- Hackathon output marker ---
-    print("[START]")
+    print(f"[START] task={task}", flush=True)
 
     if verbose:
         print(f"Task {task} | Model: {MODEL_NAME} | Endpoint: {API_BASE_URL}")
@@ -196,7 +196,7 @@ def run_task(task: int, max_steps: int = 40, verbose: bool = True) -> float:
         result = env.step(action)
 
         # --- Hackathon output marker ---
-        print("[STEP]")
+        print(f"[STEP] step={step+1} reward={result.reward}", flush=True)
 
         if verbose:
             print(f"  Env: [{result.observation.status}] {result.observation.message}  reward={result.reward:+.2f}")
@@ -215,7 +215,7 @@ def run_task(task: int, max_steps: int = 40, verbose: bool = True) -> float:
     final_score = env.score()
 
     # --- Hackathon output marker ---
-    print("[END]")
+    print(f"[END] task={task} score={final_score} steps={step}", flush=True)
 
     if verbose:
         print(f"Final score: {final_score:.2f} / 1.00  (steps used: {step})")
