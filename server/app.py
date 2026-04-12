@@ -5,8 +5,8 @@ Endpoints mirror the OpenEnv spec.
 
 from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, Field
+from typing import Optional, Union
 import uvicorn
 import os
 import sys
@@ -29,19 +29,27 @@ app.add_middleware(
 _envs: dict[int, EmailTriageEnv] = {}
 
 
+def _parse_task(task: Union[int, str]) -> int:
+    if isinstance(task, str):
+        if task.startswith("task"):
+            return int(task[4:])
+        return int(task)
+    return task
+
 class ResetRequest(BaseModel):
-    task: int = 1
+    task: Union[int, str] = 1
 
 
 class StepRequest(BaseModel):
-    task: int = 1
+    task: Union[int, str] = 1
     action: Action
 
 
-def _get_env(task: int) -> EmailTriageEnv:
-    if task not in _envs:
-        raise HTTPException(status_code=400, detail=f"Task {task} not initialised. Call /reset first.")
-    return _envs[task]
+def _get_env(task: Union[int, str]) -> EmailTriageEnv:
+    task_int = _parse_task(task)
+    if task_int not in _envs:
+        raise HTTPException(status_code=400, detail=f"Task {task_int} not initialised. Call /reset first.")
+    return _envs[task_int]
 
 
 @app.get("/health")
@@ -51,7 +59,7 @@ def health():
 
 @app.post("/reset")
 def reset(req: Optional[ResetRequest] = Body(default=None)):
-    task = req.task if req else 1
+    task = _parse_task(req.task if req else 1)
     env = EmailTriageEnv(task=task)
     obs = env.reset()
     _envs[task] = env
@@ -72,15 +80,15 @@ def step(req: StepRequest):
 
 
 @app.get("/state")
-def state(task: int = 1):
+def state(task: Union[int, str] = 1):
     env = _get_env(task)
     return {"state": env.state(), "score": env.score()}
 
 
 @app.get("/score")
-def score(task: int = 1):
+def score(task: Union[int, str] = 1):
     env = _get_env(task)
-    return {"score": env.score(), "task": task}
+    return {"score": env.score(), "task": _parse_task(task)}
 
 
 def main():
