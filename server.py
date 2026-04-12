@@ -3,7 +3,7 @@ FastAPI server exposing the Email Triage environment via HTTP.
 Endpoints mirror the OpenEnv spec.
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
@@ -45,10 +45,11 @@ def health():
 
 
 @app.post("/reset")
-def reset(req: ResetRequest):
-    env = EmailTriageEnv(task=req.task)
+def reset(req: Optional[ResetRequest] = Body(default=None)):
+    task = req.task if req else 1
+    env = EmailTriageEnv(task=task)
     obs = env.reset()
-    _envs[req.task] = env
+    _envs[task] = env
     return {"observation": obs.model_dump(), "state": env.state()}
 
 
